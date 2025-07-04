@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-proxy
+spec:
+  selector:
+    matchLabels:
+      app: proxy           # Pod label to be used by Service to select the pods from this deployment
+  replicas: 3                 # number of replica of the Pods
+  template:
+    metadata:
+      labels:  # Pod's label
+        app: proxy
+    spec:
+      containers:
+      - name: todo-proxy-container
+        image: magarp0723/todo-proxy:v2      # which image it will use
+        ports:
+        - containerPort: 8080     # Port exposed by container inside the Pod
+

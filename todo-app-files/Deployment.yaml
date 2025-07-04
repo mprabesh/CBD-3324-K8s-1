@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todoapp-deployment
+spec:
+  selector:
+    matchLabels:
+      id: C0939678           # Pod label to be used by Service to select the pods from this deployment
+  replicas: 3                 # number of replica of the Pods
+  template:
+    metadata:
+      labels:
+        env: dev         # Pod's label
+        app: todo-app
+        id: C0939678
+    spec:
+      containers:
+      - name: todo-list-app
+        image: magarp0723/todo-list-app:v1      # which image it will use
+        ports:
+        - containerPort: 3000     # Port exposed by container inside the Pod
